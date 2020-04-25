@@ -54,19 +54,19 @@
                 <p>O</p>
                 <div class="rigth"></div>
             </div>
-            <form>
+            <form @submit.prevent="loginUser(logUser)">
                 <div class="user">
-                    <p>Username</p>
+                    <p>Email</p>
                     <div class="inputUser">
-                        <img src="../assets/header/user.png" alt="">
-                        <input type="text" name="" id="" placeholder="Escribe tu nombre">
+                        <img src="../assets/header/emailICon.png" alt="">
+                        <input type="text" name="" v-model="logUser.email" placeholder="Escribe tu email">
                     </div>
                 </div>
                 <div class="user">
                     <p>Password</p>
                     <div class="inputUser">
                         <img src="../assets/header/password.png" alt="">
-                        <input type="text" name="" id="" placeholder="Escribe tu contraseña">
+                        <input type="password" name="" v-model="logUser.password" placeholder="Escribe tu contraseña">
                     </div>
                 </div>
                 <div class="forget">
@@ -106,33 +106,33 @@
                     <p>O</p>
                     <div class="rigthAcom"></div>
                 </div>
-                <form>
+                <form @submit.prevent="addUser(newUser)">
                     <div class="userAcom">
                         <p>Username</p>
                         <div class="inputUserAcom">
                             <img src="../assets/acompanamiento/user.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu nombre">
+                            <input type="text" name="" v-model="newUser.nombre" placeholder="Escribe tu nick">
                         </div>
                     </div>
                     <div class="userAcom">
                         <p>Teléfono</p>
                         <div class="inputUserAcom">
                             <img src="../assets/acompanamiento/telefono.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu teléfono">
+                            <input type="text" name="" v-model="newUser.telefono" placeholder="Escribe tu teléfono">
                         </div>
                     </div>
                     <div class="userAcom">
                         <p>E-mail</p>
                         <div class="inputUserAcom">
                             <img src="../assets/acompanamiento/emailIcon.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu e-mail">
+                            <input type="text" name="" v-model="newUser.email" placeholder="Escribe tu e-mail">
                         </div>
                     </div>
                     <div class="userAcom">
                         <p>Contraseña</p>
                         <div class="inputUserAcom">
                             <img src="../assets/acompanamiento/password.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu contraseña">
+                            <input type="password" name="" v-model="newUser.password" placeholder="Escribe tu contraseña">
                         </div>
                     </div>
                     <div class="botonR">
@@ -155,10 +155,21 @@
 
 
 <script>
+import routesApi from '../backRoutes';
+
 export default {
-    date(){
+    data(){
         return{
-        
+            newUser:{
+                nombre:  '',
+                telefono: '',
+                email:    '',
+                password:''
+            },
+            logUser:{
+                email:'',
+                password:''
+            }
         }
     },
     methods:{
@@ -193,6 +204,23 @@ export default {
                 if(click == container){
                     document.querySelector('.bg-modalAcom').style.display = 'none';
                 }
+            });
+        },
+        addUser(newUser){
+            this.axios.post(routesApi.user.register, newUser)
+            .then(res => {
+                this.newUser = {};
+                console.log(res.data);
+            })
+        },
+        loginUser(data){
+            this.axios.post(routesApi.user.login, data)
+            .then(res => {
+
+                var jwt = res.data;
+                localStorage.setItem('usertoken',jwt);
+                this.logUser = {};
+                this.$router.push({name: 'newTrabajo'})
             });
         }
     }

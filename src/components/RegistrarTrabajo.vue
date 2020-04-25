@@ -11,19 +11,19 @@
                 <form @submit.prevent="isLogin()">
                     <div class="nombre">
                         <h2>Nombre del trabajo</h2>
-                        <input type="text" name="" id="" placeholder="e.j, Derivadas calculo diferencial">
+                        <input type="text" name="" placeholder="e.j, Derivadas calculo diferencial">
                         <div class="separadorTrabajo"></div>
                     </div>
                     <div class="descripcion">
                         <h2>Decripción del trabajo</h2>
                         <div class="textarea">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Describe tu trabajo aquí..."></textarea>
+                            <textarea name="" cols="30" rows="10" placeholder="Describe tu trabajo aquí..."></textarea>
                         </div>
                     </div>
                     <div class="upload">
                         <div class="file">
                             <p>+ Subir archivos</p>
-                            <input class="btn" type="file" name="" id="" value="+ Subir archivos">
+                            <input class="btn" type="file" name="" value="+ Subir archivos">
                         </div>
                         <div class="parrafo">
                             <p>Arrastra documentos o imagenes que puedan ser de utilidad para explicar tu trabajo.</p>
@@ -33,7 +33,7 @@
                         <h2>Materia del trabajo</h2>
                         <div class="container-box">
                             <div class="box">
-                                <select name="" id="">
+                                <select name="">
                                     <option value="">Seleccione una materia</option>
                                     <option value="">Materia 1</option>
                                     <option value="">Materia 2</option>
@@ -49,7 +49,7 @@
                             <p>Día:</p>
                             <div class="fechaLimi">
                                 <div class="boxDia">
-                                    <select name="" id="">
+                                    <select name="">
                                         <option value=""></option>
                                         <option value="">1</option>
                                         <option value="">2</option>
@@ -61,7 +61,7 @@
                             <p class="margen">Mes:</p>
                             <div class="fechaLimi">
                                 <div class="boxDia">
-                                    <select name="" id="">
+                                    <select name="">
                                         <option value=""></option>
                                         <option value="">1</option>
                                         <option value="">2</option>
@@ -73,7 +73,7 @@
                             <p class="margen">Año:</p>
                             <div class="fechaLimi">
                                 <div class="boxDia">
-                                    <select name="" id="">
+                                    <select name="">
                                         <option value=""></option>
                                         <option value="">1</option>
                                         <option value="">2</option>
@@ -88,7 +88,7 @@
                         <h2>Materia del trabajo</h2>
                         <div class="container-box">
                             <div class="boxPago">
-                                <select name="" id="">
+                                <select name="">
                                     <option value="">Escoge un rango</option>
                                     <option value="">$10.000 - $15.000</option>
                                     <option value="">$20.000 - $25.000</option>
@@ -133,28 +133,28 @@
                         <p>Username</p>
                         <div class="inputUserAcomp">
                             <img src="../assets/acompanamiento/user.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu nombre">
+                            <input type="text" name="" v-model="newUser.nombre" placeholder="Escribe tu nombre">
                         </div>
                     </div>
                     <div class="userAcomp">
                         <p>Teléfono</p>
                         <div class="inputUserAcomp">
                             <img src="../assets/acompanamiento/telefono.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu teléfono">
+                            <input type="text" name="" v-model="newUser.telefono" placeholder="Escribe tu teléfono">
                         </div>
                     </div>
                     <div class="userAcomp">
                         <p>E-mail</p>
                         <div class="inputUserAcomp">
                             <img src="../assets/acompanamiento/emailIcon.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu e-mail">
+                            <input type="text" name="" v-model="newUser.email" placeholder="Escribe tu e-mail">
                         </div>
                     </div>
                     <div class="userAcomp">
                         <p>Contraseña</p>
                         <div class="inputUserAcomp">
                             <img src="../assets/acompanamiento/password.png" alt="">
-                            <input type="text" name="" id="" placeholder="Escribe tu contraseña">
+                            <input type="text" name="" v-model="newUser.password" placeholder="Escribe tu contraseña">
                         </div>
                     </div>
                     <div class="botonRp">
@@ -198,15 +198,15 @@
                 <div class="userAl">
                     <p>Username</p>
                     <div class="inputUserAl">
-                        <img src="../assets/header/user.png" alt="">
-                        <input type="text" name="" id="" placeholder="Escribe tu nombre">
+                        <img src="../assets/header/emailIcon.png" alt="">
+                        <input type="text" name="" v-model="logUser.email" placeholder="Escribe tu e-mail">
                     </div>
                 </div>
                 <div class="userAl">
                     <p>Password</p>
                     <div class="inputUserAl">
                         <img src="../assets/header/password.png" alt="">
-                        <input type="text" name="" id="" placeholder="Escribe tu contraseña">
+                        <input type="text" name="" v-model="logUser.password" placeholder="Escribe tu contraseña">
                     </div>
                 </div>
                 <div class="forgetAl">
@@ -232,7 +232,16 @@
 export default {
     data(){
         return{
-            algo: true,
+            newUser:{
+                nombre:  '',
+                telefono: '',
+                email:    '',
+                password:''
+            },
+            logUser:{
+                email:'',
+                password:''
+            }
         }
     },
     methods:{
@@ -248,7 +257,7 @@ export default {
                 document.querySelector('.bg-modalAcomp').style.display = 'flex';    
             });
 
-            var container      = document.querySelector('.bg-modalAcomp');
+            var container = document.querySelector('.bg-modalAcomp');
 
             document.addEventListener('click',function(e){
                 var click = e.target;
@@ -274,8 +283,8 @@ export default {
                     document.querySelector('.bg-modalAl').style.display = 'none';
                 }
             });
-        }
-    }
+        },
+    },
 }
 </script>
 
