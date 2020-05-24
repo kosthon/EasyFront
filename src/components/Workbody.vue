@@ -88,8 +88,7 @@ export default {
       return this.trabajos.filter(trabajo => {
         return trabajo.nameWork.includes(this.busqueda);
       });
-    },
-    filterWorks() {}
+    }
   },
   methods: {
     getTrabajos() {
