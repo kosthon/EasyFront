@@ -20,7 +20,12 @@
       <div class="filtro">
         <h3>Filtro</h3>
         <div class="linea"></div>
-        <input type="checkbox" name="calculos" id="calculo" />
+        <input
+          type="checkbox"
+          name="calculos"
+          id="calculo"
+          v-model="filtrado"
+        />
         <label for="calculo">Cálculo</label>
         <input type="checkbox" name="ecuaciones" id="ecuaciones" />
         <label for="ecuaciones">Ecuaciones</label>
@@ -37,14 +42,19 @@
             <th>
               <div class="inputSearch">
                 <img src="../assets/trabajos/Lupita.png" alt="" />
-                <input type="text" name="" placeholder="Buscar trabajos" />
+                <input
+                  type="text"
+                  name=""
+                  placeholder="Buscar trabajos"
+                  v-model="busqueda"
+                />
               </div>
               <div class="separador"></div>
               <div class="lineaListado"></div>
             </th>
           </tr>
           <tr>
-            <td v-for="trabajo in trabajos" :key="trabajo._id">
+            <td v-for="trabajo in findWorks || filtrado" :key="trabajo._id">
               <h1>{{ trabajo.nameWork }}</h1>
               <p>
                 {{ trabajo.description }}
@@ -68,8 +78,18 @@ import api from "../backRoutes";
 export default {
   data() {
     return {
-      trabajos: []
+      trabajos: [],
+      busqueda: "",
+      filtrado: []
     };
+  },
+  computed: {
+    findWorks() {
+      return this.trabajos.filter(trabajo => {
+        return trabajo.nameWork.includes(this.busqueda);
+      });
+    },
+    filterWorks() {}
   },
   methods: {
     getTrabajos() {
