@@ -54,7 +54,11 @@
             </th>
           </tr>
           <tr>
-            <td v-for="trabajo in findWorks || filtrado" :key="trabajo._id">
+            <td
+              v-for="trabajo in findWorks"
+              :key="trabajo._id"
+              @click="descrip"
+            >
               <h1>{{ trabajo.nameWork }}</h1>
               <p>
                 {{ trabajo.description }}
@@ -69,6 +73,9 @@
         </table>
       </div>
     </section>
+    <div class="detalle">
+      <section class="detalleW"></section>
+    </div>
   </div>
 </template>
 

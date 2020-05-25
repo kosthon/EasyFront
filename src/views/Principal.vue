@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import cabeza from "../components/HeaderLogout";
+import cabeza from "../components/HeaderIniciado";
 import cuerpo from "../components/Workbody";
 import pie from "../components/Footer";
 
