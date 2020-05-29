@@ -54,11 +54,7 @@
             </th>
           </tr>
           <tr>
-            <td
-              v-for="trabajo in findWorks"
-              :key="trabajo._id"
-              @click="descrip"
-            >
+            <td v-for="trabajo in findWorks" :key="trabajo._id">
               <h1>{{ trabajo.nameWork }}</h1>
               <p>
                 {{ trabajo.description }}
